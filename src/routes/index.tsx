@@ -15,9 +15,3 @@ export default function AppRoutes() {
     </BrowserRouter>
   );
 }
-
-function placeholder(text: string) {
-  return function Component() {
-    return <p>{text}</p>;
-  };
-}
