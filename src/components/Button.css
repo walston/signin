@@ -1,0 +1,17 @@
+button {
+  --buttonHeight: 10px;
+  --color: 120;
+  --lightColor: hsl(var(--color), 80%, 80%);
+  --middleColor: hsl(var(--color), 50%, 50%);
+  --darkColor: hsl(var(--color), 20%, 20%);
+  background-color: var(--lightColor);
+  color: var(--darkColor);
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: var(--buttonHeight);
+  box-shadow: 0 var(--buttonHeight) var(--middleColor);
+}
+button:active {
+  transform: translateY(var(--buttonHeight));
+  box-shadow: unset;
+}
