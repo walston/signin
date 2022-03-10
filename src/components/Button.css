@@ -1,5 +1,5 @@
 button {
-  --buttonHeight: 8px;
+  --buttonDepth: 8px;
   --transition: 250ms;
   --color: 120;
   --lightColor: hsl(var(--color), 80%, 80%);
@@ -12,9 +12,8 @@ button {
   border: none;
   border-radius: 10px;
   padding: 8px;
-  margin: var(--buttonHeight) auto;
-  box-shadow: 0 var(--buttonHeight) var(--darkColor);
-  width: 50%;
+  box-shadow: 0 var(--buttonDepth) var(--darkColor);
+  width: 40%;
   font-size: 16px;
   transition: var(--transition);
 }
@@ -25,6 +24,6 @@ button:hover {
 }
 button:active {
   transition: var(--transition);
-  transform: translateY(var(--buttonHeight));
+  transform: translateY(var(--buttonDepth));
   box-shadow: unset;
 }
