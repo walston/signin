@@ -7,10 +7,7 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
-        <Route
-          path="create/"
-          element={<CreateUser children="Create new user" />}
-        />
+        <Route path="create/" element={<CreateUser />} />
         <Route path="user/">
           <Route index element="Main User" />
           <Route path="edit/" element="User edit" />
