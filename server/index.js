@@ -1,5 +1,5 @@
 import express from "express";
-import users from "./users";
+import users from "./users.js";
 
 const PORT = process.env.PORT || 3001;
 
