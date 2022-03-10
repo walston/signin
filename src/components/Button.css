@@ -1,17 +1,30 @@
 button {
-  --buttonHeight: 10px;
+  --buttonHeight: 8px;
+  --transition: 250ms;
   --color: 120;
   --lightColor: hsl(var(--color), 80%, 80%);
-  --middleColor: hsl(var(--color), 50%, 50%);
-  --darkColor: hsl(var(--color), 20%, 20%);
+  --middleColor: hsl(var(--color), 70%, 70%);
+  --darkColor: hsl(var(--color), 50%, 50%);
+  --textColor: hsl(var(--color), 30%, 30%);
+  background-color: var(--middleColor);
+  color: var(--textColor);
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 8px;
+  margin: var(--buttonHeight) auto;
+  box-shadow: 0 var(--buttonHeight) var(--darkColor);
+  width: 50%;
+  font-size: 16px;
+  transition: var(--transition);
+}
+button:hover {
   background-color: var(--lightColor);
-  color: var(--darkColor);
-  border-radius: 5px;
-  padding: 10px;
-  margin-top: var(--buttonHeight);
-  box-shadow: 0 var(--buttonHeight) var(--middleColor);
+  transition: var(--transition);
+  cursor: pointer;
 }
 button:active {
+  transition: var(--transition);
   transform: translateY(var(--buttonHeight));
   box-shadow: unset;
 }
