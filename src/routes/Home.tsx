@@ -1,13 +1,23 @@
 import "./Home.css";
 import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
+import Form from "../components/Form";
+
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
-    <form action="/login" onSubmit={(event) => event.preventDefault()}>
+    <Form action="/login" onSubmit={(event) => event.preventDefault()}>
       <label htmlFor="email">Email</label>
       <input type="email" id="email" />
       <label htmlFor="pass">Password</label>
       <input type="password" id="pass" />
-      <Button color="20">Submit</Button>
-    </form>
+      <div className="btnCont">
+        <Button color="20" onClick={() => navigate("/create")}>
+          Sign Up
+        </Button>
+        <Button color="80">Login</Button>
+      </div>
+    </Form>
   );
 }
