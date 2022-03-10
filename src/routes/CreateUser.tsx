@@ -1,5 +1,6 @@
 import React from "react";
+import Form from "../components/Form";
 
 export default function CreateUser({ children }) {
-  return <React.Fragment>{children}</React.Fragment>;
+  return <Form>{children}</Form>;
 }
