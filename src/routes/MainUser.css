@@ -1,0 +1,24 @@
+.MainUser {
+  margin: 100px auto;
+}
+h1 {
+  text-align: center;
+}
+#avatar {
+  background-image: url("https://yt3.ggpht.com/ytc/AKedOLQf5MBcFSDzo2FeZIXSqafCvdRMGjW2C-0j8RpD=s900-c-k-c0x00ffffff-no-rj");
+  background-position: center;
+  background-repeat: none;
+  background-size: contain;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  background-color: blue;
+  margin: auto;
+}
+#btnCont {
+  display: flex;
+  gap: 10px;
+  justify-content: space-evenly;
+  width: 40%;
+  margin: auto;
+}
