@@ -7,7 +7,11 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <Form action="/login" onSubmit={(event) => event.preventDefault()}>
+    <Form
+      action="/login"
+      style={{ margin: "300px auto" }}
+      onSubmit={(event) => event.preventDefault()}
+    >
       <label htmlFor="email">Email</label>
       <input type="email" id="email" />
       <label htmlFor="pass">Password</label>

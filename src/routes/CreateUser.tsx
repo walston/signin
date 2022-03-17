@@ -27,7 +27,10 @@ export default function CreateUser() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   return (
-    <Form onSubmit={(event) => event.preventDefault()}>
+    <Form
+      style={{ margin: "300px auto" }}
+      onSubmit={(event) => event.preventDefault()}
+    >
       <label htmlFor="userName">Username</label>{" "}
       <input
         type="text"
