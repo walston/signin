@@ -3,7 +3,12 @@ import express from "express";
 const USERS = new Map();
 const router = express.Router();
 
-router.use(express.json());
+router.use(express.json(), function logger(req, res, next) {
+  console.log(req.method, req.path);
+  console.log(req.headers);
+  console.log(req.body);
+  next();
+});
 
 router.get("/", function getAllUsers(req, res) {
   const users = Array.from(USERS.entries()).map(([id, value]) => {
