@@ -3,10 +3,12 @@ import Form from "../components/Form";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 
+const APIDOMAIN = process.env.REACT_APP_API_DOMAIN;
+
 async function sendCreateUserRequest({ id, username, password }) {
   const body = JSON.stringify({ username, password });
   console.log({ id, username, password });
-  return fetch(`http://localhost:3001/users/${id}`, {
+  return fetch(`${APIDOMAIN}/users/${id}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body,
