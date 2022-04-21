@@ -1,11 +1,12 @@
 .MainUser {
   margin: 100px auto;
+  --avatar: url("../images/defaultAvatar.jpeg");
 }
-h1 {
+.MainUser h1 {
   text-align: center;
 }
 #avatar {
-  background-image: url("https://yt3.ggpht.com/ytc/AKedOLQf5MBcFSDzo2FeZIXSqafCvdRMGjW2C-0j8RpD=s900-c-k-c0x00ffffff-no-rj");
+  background-image: var(--avatar);
   background-position: center;
   background-repeat: none;
   background-size: contain;
