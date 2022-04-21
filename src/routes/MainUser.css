@@ -1,5 +1,4 @@
 .MainUser {
-  margin: 100px auto;
   --avatar: url("../images/defaultAvatar.jpeg");
 }
 .MainUser h1 {

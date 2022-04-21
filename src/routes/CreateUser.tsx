@@ -31,10 +31,7 @@ export default function CreateUser() {
   const [error, setError] = React.useState("");
   const displayErrorMessage = () => setError("There's a problem");
   return (
-    <Form
-      style={{ margin: "300px auto" }}
-      onSubmit={(event) => event.preventDefault()}
-    >
+    <Form onSubmit={(event) => event.preventDefault()}>
       <label htmlFor="userName">Username</label>{" "}
       <input
         type="text"
