@@ -5,29 +5,31 @@ import { useNavigate } from "react-router-dom";
 
 const APIDOMAIN = process.env.REACT_APP_API_DOMAIN;
 
-async function sendCreateUserRequest({ id, username, password }) {
+async function sendCreateUserRequest({ username, password }) {
   const body = JSON.stringify({ username, password });
-  console.log({ id, username, password });
-  return fetch(`${APIDOMAIN}/users/${id}`, {
+  return fetch(`${APIDOMAIN}/users/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body,
-  }).then((res) => {
+  }).then(async (res) => {
     if (!res.ok) {
       throw Error("Nahhhh");
+    } else {
+      try {
+        console.log(await res.json());
+      } catch (error) {
+        console.error(error);
+      }
     }
   });
-}
-
-function createUserID() {
-  const userID = Math.floor(Math.random() * 26000);
-  return userID;
 }
 
 export default function CreateUser() {
   const navigate = useNavigate();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState("");
+  const displayErrorMessage = () => setError("There's a problem");
   return (
     <Form
       style={{ margin: "300px auto" }}
@@ -51,10 +53,11 @@ export default function CreateUser() {
           style={{ display: "block" }}
           onClick={() => {
             sendCreateUserRequest({
-              id: createUserID(),
               username: username,
               password: password,
-            }).then(() => navigate("/user"));
+            })
+              .then(() => navigate("/user"))
+              .catch(() => displayErrorMessage());
           }}
         >
           Create User
