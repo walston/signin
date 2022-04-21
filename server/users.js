@@ -121,6 +121,14 @@ function createTables(newdb) {
   );
 }
 async function createUserInDatabase(user_name, user_pass) {
+  const alphaCheck = /[a-zA-Z]/;
+  if (alphaCheck.test(user_name)) {
+    console.log("s'good");
+  } else {
+    throw Error(
+      "UserInputError: username doesn't match expected format /[a-zA-Z]/"
+    );
+  }
   const insertStatement = db.prepare(
     `INSERT INTO user(user_name, user_pass) VALUES (?,?);`
   );
