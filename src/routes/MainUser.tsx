@@ -7,12 +7,14 @@ export default function MainUser() {
   return (
     <div className="MainUser">
       <div id="avatar"></div>
-      <h1 id="hello">Hello, DYNAMIC NAME.</h1>
+      <h1 id="hello">Hello, DYNAMIC USERNAME.</h1>
       <Form>
         <label>Username</label>
-        <input type="text" placeholder="DYANAMIC USER NAME" />
+        <input type="text" placeholder="DYANAMIC USERNAME" />
         <label>Password</label>
-        <input type="password" />
+        <input type="password" placeholder="PASSWORD" />
+        <label>Email</label>
+        <input type="email" placeholder="DYANAMIC EMAIL" />
       </Form>
       <div id="btnCont">
         {" "}
