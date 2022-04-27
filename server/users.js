@@ -1,5 +1,5 @@
 import express from "express";
-import { createUserInDatabase } from "./database";
+import { createUserInDatabase, getUserFromDatabase } from "./database";
 
 const USERS = new Map();
 const router = express.Router();
@@ -23,13 +23,14 @@ router.get("/", function getAllUsers(req, res) {
 
 router.get("/:id", function getSingleUser(req, res) {
   const id = req.params.id;
-  const user = USERS.get(id);
+  const user = getUserFromDatabase(id);
   if (user) {
     res.status(200).send(user);
   } else {
     res.status(404).send();
   }
 });
+
 //Expected request body: { username, password }
 router.post("/", (req, res) => {
   const user = req.body;

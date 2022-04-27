@@ -75,13 +75,30 @@ export async function createUserInDatabase(user_name, user_pass) {
         if (error) {
           rej(error);
         } else {
-          console.log(user_id, user_name);
           res({
             userID: user_id,
             username: user_name,
           });
         }
       });
+    });
+  });
+}
+
+export async function getUserFromDatabase(id) {
+  const selectStatement = db.prepare(
+    `SELECT user_name, user_id FROM user WHERE user_id = ?;`
+  );
+  return new Promise((res, rej) => {
+    selectStatement.get(id, (error, { user_id, user_name }) => {
+      if (error) {
+        rej(error);
+      } else {
+        res({
+          userID: user_id,
+          username: user_name,
+        });
+      }
     });
   });
 }
