@@ -8,8 +8,8 @@ export default function Home() {
 
   return (
     <Form action="/login" onSubmit={(event) => event.preventDefault()}>
-      <label htmlFor="email">Email</label>
-      <input type="email" id="email" />
+      <label htmlFor="username">Username</label>
+      <input type="text" id="username" />
       <label htmlFor="pass">Password</label>
       <input type="password" id="pass" />
       <div className="btnCont">
