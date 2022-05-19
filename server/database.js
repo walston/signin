@@ -1,48 +1,20 @@
 import sqlite3 from "sqlite3";
 import zxcvbn from "zxcvbn";
-import { exit } from "process";
+import argon2 from "argon2";
+import csprng from "csprng";
 
 const USERS_DB_PATH = "./users.db";
 let db = new sqlite3.Database(
   USERS_DB_PATH,
   sqlite3.OPEN_READWRITE,
   (error) => {
-    if (error && error.code === "SQLITE_CANTOPEN") {
-      return createDatabase();
-    } else if (error) {
+    if (error) {
       console.error(error);
       process.exit(1);
     }
   }
 );
-export function createDatabase() {
-  var newdb = new sqlite3.Database(USERS_DB_PATH, (error) => {
-    if (error) {
-      console.error(error);
-      exit(1);
-    }
-    createTables(newdb);
-  });
-  db = newdb;
-}
-export function createTables(newdb) {
-  newdb.exec(
-    `
-    create table user (
-      user_id int primary key not null,
-      user_name text not null,
-      user_pass text not null
-    );
-    insert into user (user_id, user_name, user_pass)
-      values (001, 'Nikki', 'Drums'),
-             (002, 'Joon', 'MouseHeads'),
-             (003, 'Nate', 'DnD');
 
-    
-  `,
-    () => console.log("something")
-  );
-}
 export async function createUserInDatabase(user_name, user_pass) {
   const alphaCheck = /[a-zA-Z]/;
   if (alphaCheck.test(user_name)) {
@@ -60,13 +32,15 @@ export async function createUserInDatabase(user_name, user_pass) {
   }
 
   const insertStatement = db.prepare(
-    `INSERT INTO user(user_name, user_pass) VALUES (?,?);`
+    `INSERT INTO user(user_name, hash, salt) VALUES (?,?,?);`
   );
   const selectStatement = db.prepare(
     `SELECT user_name, user_id FROM user ORDER BY user_id DESC LIMIT 1;`
   );
+  const salt = await csprng(160, 36);
+  const hashPassword = await argon2.hash(user_pass + salt);
   return new Promise((res, rej) => {
-    insertStatement.run(user_name, user_pass).finalize((error) => {
+    insertStatement.run(user_name, hashPassword, salt).finalize((error) => {
       if (error) {
         rej(error);
         return;
@@ -100,5 +74,31 @@ export async function getUserFromDatabase(id) {
         });
       }
     });
+  });
+}
+
+export async function validateUserFromDatabase(username, password) {
+  const selectStatement = db.prepare(
+    `SELECT user_name, user_id, hash, salt FROM user WHERE user_name = ?;`
+  );
+  return new Promise((res, rej) => {
+    selectStatement.get(
+      username,
+      async (error, { user_name, user_id, hash, salt }) => {
+        if (error) {
+          rej(error);
+          return;
+        }
+        const passwordVerified = await argon2.verify(hash, password + salt);
+        if (passwordVerified) {
+          res({
+            userID: user_id,
+            username: user_name,
+          });
+        } else {
+          rej(new Error("Not authorized"));
+        }
+      }
+    );
   });
 }
