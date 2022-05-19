@@ -1,5 +1,5 @@
 import express from "express";
-import { createUserInDatabase, getUserFromDatabase } from "./database";
+import { createUserInDatabase, getUserFromDatabase } from "./database.js";
 
 const USERS = new Map();
 const router = express.Router();
@@ -21,9 +21,9 @@ router.get("/", function getAllUsers(req, res) {
   res.send(users);
 });
 
-router.get("/:id", function getSingleUser(req, res) {
+router.get("/:id", async function getSingleUser(req, res) {
   const id = req.params.id;
-  const user = getUserFromDatabase(id);
+  const user = await getUserFromDatabase(id);
   if (user) {
     res.status(200).send(user);
   } else {
