@@ -10,8 +10,7 @@ export default function AppRoutes() {
         <Route index element={<Home />} />
         <Route path="create/" element={<CreateUser />} />
         <Route path="user/">
-          <Route index element={<MainUser />} />
-          <Route path="edit/" element="User edit" />
+          <Route path=":id" element={<MainUser />} />
           <Route path="delete/" element="Delete user" />
         </Route>
       </Routes>
