@@ -1,5 +1,5 @@
 import express from "express";
-import { createUserInDatabase, getUserFromDatabase } from "./database.js";
+import { createUserInDatabase, getUserFromDatabase } from "./database/index.js";
 
 const USERS = new Map();
 const router = express.Router();

@@ -1,5 +1,5 @@
 import express from "express";
-import { validateUserFromDatabase } from "./database.js";
+import { validateUserFromDatabase } from "./database/index.js";
 
 const router = express.Router();
 router.use(express.json());
