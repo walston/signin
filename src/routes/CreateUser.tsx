@@ -16,7 +16,9 @@ async function sendCreateUserRequest({ username, password }) {
       throw Error("Nahhhh");
     } else {
       try {
-        console.log(await res.json());
+        const userObject = await res.json();
+        const userID = userObject.userID;
+        return userID;
       } catch (error) {
         console.error(error);
       }
@@ -53,7 +55,7 @@ export default function CreateUser() {
               username: username,
               password: password,
             })
-              .then(() => navigate("/user"))
+              .then((id) => navigate(`/user/${id}`))
               .catch(() => displayErrorMessage());
           }}
         >
