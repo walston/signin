@@ -1,7 +1,6 @@
 import zxcvbn from "zxcvbn";
-import argon2 from "argon2";
-import csprng from "csprng";
 import { db } from "./connection.js";
+import { passwordSecurity } from "./passwordSecurity.js";
 
 export async function createUserInDatabase(user_name, user_pass) {
   const alphaCheck = /[a-zA-Z]/;
@@ -25,10 +24,10 @@ export async function createUserInDatabase(user_name, user_pass) {
   const selectStatement = db.prepare(
     `SELECT user_name, user_id FROM user ORDER BY user_id DESC LIMIT 1;`
   );
-  const salt = await csprng(160, 36);
-  const hashPassword = await argon2.hash(user_pass + salt);
+  const { hash, salt } = await passwordSecurity(user_pass);
+
   return new Promise((res, rej) => {
-    insertStatement.run(user_name, hashPassword, salt).finalize((error) => {
+    insertStatement.run(user_name, hash, salt).finalize((error) => {
       if (error) {
         rej(error);
         return;
