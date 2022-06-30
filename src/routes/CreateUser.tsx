@@ -2,29 +2,7 @@ import React from "react";
 import Form from "../components/Form";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
-
-const APIDOMAIN = process.env.REACT_APP_API_DOMAIN;
-
-async function sendCreateUserRequest({ username, password }) {
-  const body = JSON.stringify({ username, password });
-  return fetch(`${APIDOMAIN}/users/`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body,
-  }).then(async (res) => {
-    if (!res.ok) {
-      throw Error("Nahhhh");
-    } else {
-      try {
-        const userObject = await res.json();
-        const userID = userObject.userID;
-        return userID;
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  });
-}
+import { sendCreateUserRequest } from "../api/user";
 
 export default function CreateUser() {
   const navigate = useNavigate();
