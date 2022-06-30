@@ -1,5 +1,6 @@
 import express from "express";
 import { createUserInDatabase, getUserFromDatabase } from "./database/index.js";
+import { updateUserInDatabase } from "./database/updateUserInDatabase.js";
 
 const USERS = new Map();
 const router = express.Router();
@@ -55,17 +56,19 @@ router.post("/:id", function createNewUser(req, res) {
   }
 });
 
-router.put("/:id", function updateSingleUser(req, res) {
+router.put("/:id", async function updateSingleUser(req, res) {
   const id = req.params.id;
   const userUpdates = req.body;
   if (!userUpdates) {
     res.status(400).send();
-  } else if (!USERS.has(id)) {
-    res.status(404).send();
   } else {
-    const user = USERS.get(id);
-    USERS.set(id, { ...user, ...userUpdates });
-    res.status(204).send();
+    try {
+      await updateUserInDatabase(id, userUpdates);
+      res.status(204).send();
+    } catch (error) {
+      console.log(error);
+      res.status(500).send();
+    }
   }
 });
 
