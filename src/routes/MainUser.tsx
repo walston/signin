@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getUser, sendUpdateUserRequest } from "../api/user";
+import StatusBar from "../components/StatusBar";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import "./MainUser.css";
@@ -17,6 +18,7 @@ export default function MainUser() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
+  const [info, setInfo] = React.useState({ status: "initial", message: "" });
 
   useEffect(() => {
     getUser(id).then((user) => {
@@ -61,18 +63,24 @@ export default function MainUser() {
             setEmail(event.target.value);
           }}
         />
+        <StatusBar status={info.status}>{info.message}</StatusBar>
       </Form>
       <div id="btnCont">
         {" "}
         <Button
           onClick={() => {
+            setInfo({ status: "pending", message: "Pending..." });
             sendUpdateUserRequest(id, { username, password, email })
-              .then(console.log)
+              .then(() =>
+                setInfo({ status: "success", message: "Successfully updated!" })
+              )
               /**
                * @TODO
                * Present user with error UI and success UI
                * */
-              .catch(console.error);
+              .catch(() =>
+                setInfo({ status: "error", message: "Could not update." })
+              );
           }}
           //add error handling to sendUpdateUserRequest()
           color="1000"
