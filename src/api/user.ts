@@ -43,7 +43,6 @@ export async function sendUpdateUserRequest(id, { username, password, email }) {
     headers: { "Content-Type": "application/json" },
     body,
   }).then(async (res) => {
-    //double check error handling what are we going to do on MainUser.tsx if the update fails
     if (!res.ok) {
       throw Error("Nahhhh");
     }

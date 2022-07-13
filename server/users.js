@@ -31,8 +31,8 @@ router.get("/:id", async function getSingleUser(req, res) {
     res.status(404).send();
   }
 });
+/** @NOTE Expected request body: { username, password }*/
 
-//Expected request body: { username, password }
 router.post("/", (req, res) => {
   const user = req.body;
   if (!user) {
@@ -66,7 +66,7 @@ router.put("/:id", async function updateSingleUser(req, res) {
       await updateUserInDatabase(id, userUpdates);
       res.status(204).send();
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       res.status(500).send();
     }
   }

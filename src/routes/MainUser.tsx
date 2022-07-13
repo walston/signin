@@ -74,15 +74,10 @@ export default function MainUser() {
               .then(() =>
                 setInfo({ status: "success", message: "Successfully updated!" })
               )
-              /**
-               * @TODO
-               * Present user with error UI and success UI
-               * */
               .catch(() =>
                 setInfo({ status: "error", message: "Could not update." })
               );
           }}
-          //add error handling to sendUpdateUserRequest()
           color="1000"
         >
           Update User
