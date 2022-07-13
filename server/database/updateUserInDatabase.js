@@ -34,6 +34,7 @@ export async function updateUserInDatabase(id, { username, pass, email }) {
       console.log("Email s'good");
     } else {
       console.log("Invalid email input");
+      throw Error("UserInputError: " + isEmailValid);
     }
   }
 
