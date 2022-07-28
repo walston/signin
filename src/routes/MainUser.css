@@ -1,19 +1,5 @@
-.MainUser {
-  --avatar: url("../images/defaultAvatar.jpeg");
-}
 .MainUser h1 {
   text-align: center;
-}
-#avatar {
-  background-image: var(--avatar);
-  background-position: center;
-  background-repeat: none;
-  background-size: contain;
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
-  background-color: blue;
-  margin: auto;
 }
 #btnCont {
   display: flex;

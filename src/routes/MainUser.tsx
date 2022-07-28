@@ -5,6 +5,7 @@ import StatusBar from "../components/StatusBar";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import "./MainUser.css";
+import AvatarUploader from "../components/AvatarUploader";
 
 type User = { userID: number; username: string; isLoading: false };
 type UserLoading = { isLoading: true };
@@ -34,7 +35,7 @@ export default function MainUser() {
   }
   return (
     <div className="MainUser">
-      <div id="avatar"></div>
+      <AvatarUploader id="avatar"></AvatarUploader>
       <h1 id="hello">Hello, {user.username}.</h1>
       <Form>
         <label>Username</label>
