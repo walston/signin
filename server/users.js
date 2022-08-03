@@ -1,6 +1,7 @@
 import express from "express";
 import { createUserInDatabase, getUserFromDatabase } from "./database/index.js";
 import { updateUserInDatabase } from "./database/updateUserInDatabase.js";
+import multer from "multer";
 
 const USERS = new Map();
 const router = express.Router();
@@ -31,8 +32,8 @@ router.get("/:id", async function getSingleUser(req, res) {
     res.status(404).send();
   }
 });
-/** @NOTE Expected request body: { username, password }*/
 
+/** @NOTE Expected request body: { username, password }*/
 router.post("/", (req, res) => {
   const user = req.body;
   if (!user) {
@@ -43,6 +44,7 @@ router.post("/", (req, res) => {
       .catch(() => res.status(400).send());
   }
 });
+
 router.post("/:id", function createNewUser(req, res) {
   const id = req.params.id;
   const user = req.body;
@@ -71,6 +73,15 @@ router.put("/:id", async function updateSingleUser(req, res) {
     }
   }
 });
+
+router.put(
+  "/:id/avatar",
+  multer({ storage: multer.memoryStorage() }).single("avatar"),
+  async function updateUserAvatar(req, res) {
+    console.log(req.file);
+    res.status(204).send();
+  }
+);
 
 router.delete("/:id", function deleteSingleUser(req, res) {
   const id = req.params.id;

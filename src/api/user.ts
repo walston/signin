@@ -48,3 +48,16 @@ export async function sendUpdateUserRequest(id, { username, password, email }) {
     }
   });
 }
+
+export async function sendUpdateAvatarRequest(id, file) {
+  const body = new FormData();
+  body.set("avatar", file);
+  return fetch(`${APIDOMAIN}/users/${id}/avatar`, {
+    method: "PUT",
+    body,
+  }).then(async (res) => {
+    if (!res.ok) {
+      throw Error("No image");
+    }
+  });
+}
