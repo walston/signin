@@ -35,7 +35,7 @@ export default function MainUser() {
   }
   return (
     <div className="MainUser">
-      <AvatarUploader id="avatar"></AvatarUploader>
+      <AvatarUploader id={id}></AvatarUploader>
       <h1 id="hello">Hello, {user.username}.</h1>
       <Form>
         <label>Username</label>
