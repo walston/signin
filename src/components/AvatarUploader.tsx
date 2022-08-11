@@ -1,13 +1,12 @@
-import { useState } from "react";
 import { FileDrop } from "react-file-drop";
 import { sendUpdateAvatarRequest } from "../api/user";
 import "./AvatarUploader.css";
 
+const APIDOMAIN = process.env.REACT_APP_API_DOMAIN;
+
 export default function AvatarUploader({ id }) {
-  const [image, setImage] = useState<null | File>(null);
   const onAvatarUploaderChange = (files: FileList | null) => {
     if (files && files.length) {
-      setImage(files[0]);
       sendUpdateAvatarRequest(id, files[0]);
     }
   };
@@ -19,7 +18,7 @@ export default function AvatarUploader({ id }) {
         onAvatarUploaderChange(files);
       }}
     >
-      {image && <img src={URL.createObjectURL(image)} alt="User avatar" />}
+      <img src={`${APIDOMAIN}/users/${id}/avatar`} alt="User avatar" />
       <input
         id="avatar-uploader"
         type="file"
