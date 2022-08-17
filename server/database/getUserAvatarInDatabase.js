@@ -9,11 +9,13 @@ export async function getUserAvatarInDatabase(id) {
     getAvatarStatement.get(id, (error, { user_avatar, avatar_mimetype }) => {
       if (error) {
         rej(error);
-      } else {
+      } else if (user_avatar && avatar_mimetype) {
         res({
           blob: user_avatar,
           mimeType: avatar_mimetype,
         });
+      } else {
+        rej(new Error("User avatar not found"));
       }
     });
   });
