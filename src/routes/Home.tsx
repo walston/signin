@@ -8,7 +8,6 @@ import { login } from "../api/login";
  * @TODO
  * ALL WE HAVE TO DO NOW IS:
  * -populate the page with a {User} that has username, pass, and image
- * -Want to use blobs for user avatar image
  */
 
 export default function Home() {
