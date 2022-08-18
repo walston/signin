@@ -1,4 +1,5 @@
-button {
+button,
+input[type="submit"] {
   --buttonDepth: 8px;
   --transition: 250ms;
   --color: 120;
@@ -18,12 +19,14 @@ button {
   font-size: 16px;
   transition: var(--transition);
 }
-button:hover {
+button:hover,
+input[type="submit"]:hover {
   background-color: var(--lightColor);
   transition: var(--transition);
   cursor: pointer;
 }
-button:active {
+button:active,
+input[type="submit"]:active {
   transition: var(--transition);
   transform: translateY(var(--buttonDepth));
   box-shadow: unset;

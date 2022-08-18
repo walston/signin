@@ -1,6 +1,7 @@
-form {
+form.Form {
   display: flex;
   flex-direction: column;
+  min-width: 300px;
   max-width: 375px;
   margin: 10px auto;
   gap: 10px;

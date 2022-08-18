@@ -2,35 +2,16 @@ import React from "react";
 import Form from "../components/Form";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
-
-async function sendCreateUserRequest({ id, username, password }) {
-  const body = JSON.stringify({ username, password });
-  console.log({ id, username, password });
-  return fetch(`http://localhost:3001/users/${id}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body,
-  }).then((res) => {
-    if (!res.ok) {
-      throw Error("Nahhhh");
-    }
-  });
-}
-
-function createUserID() {
-  const userID = Math.floor(Math.random() * 26000);
-  return userID;
-}
+import { sendCreateUserRequest } from "../api/user";
 
 export default function CreateUser() {
   const navigate = useNavigate();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState("");
+  const displayErrorMessage = () => setError("There's a problem");
   return (
-    <Form
-      style={{ margin: "300px auto" }}
-      onSubmit={(event) => event.preventDefault()}
-    >
+    <Form onSubmit={(event) => event.preventDefault()}>
       <label htmlFor="userName">Username</label>{" "}
       <input
         type="text"
@@ -49,10 +30,11 @@ export default function CreateUser() {
           style={{ display: "block" }}
           onClick={() => {
             sendCreateUserRequest({
-              id: createUserID(),
               username: username,
               password: password,
-            }).then(() => navigate("/user"));
+            })
+              .then((id) => navigate(`/user/${id}`))
+              .catch(() => displayErrorMessage());
           }}
         >
           Create User
