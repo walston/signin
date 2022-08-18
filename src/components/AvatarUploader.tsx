@@ -18,13 +18,16 @@ export default function AvatarUploader({ id }) {
     : `${APIDOMAIN}/users/${id}/avatar`;
 
   return (
-    <FileDrop
-      className="AvatarUploader"
-      onDrop={(files) => {
-        onAvatarUploaderChange(files);
-      }}
-    >
-      <img src={imageSource} alt="User avatar" />
+    <div className="AvatarUploader">
+      {" "}
+      <FileDrop
+        className="file-drop"
+        onDrop={(files) => {
+          onAvatarUploaderChange(files);
+        }}
+      >
+        <img src={imageSource} alt="User avatar" />
+      </FileDrop>
       <input
         id="avatar-uploader"
         type="file"
@@ -34,10 +37,6 @@ export default function AvatarUploader({ id }) {
           onAvatarUploaderChange(files);
         }}
       />
-    </FileDrop>
+    </div>
   );
 }
-/**
- * @TODO
- * - setup image saving in DB
- */
