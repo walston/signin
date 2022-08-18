@@ -5,7 +5,7 @@ export async function getUserAvatarInDatabase(id) {
     `SELECT user_avatar, avatar_mimetype FROM user
       WHERE user_id = ?`
   );
-  await new Promise((res, rej) => {
+  return new Promise((res, rej) => {
     getAvatarStatement.get(id, (error, { user_avatar, avatar_mimetype }) => {
       if (error) {
         rej(error);

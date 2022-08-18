@@ -81,9 +81,14 @@ router.put(
   "/:id/avatar",
   multer({ storage: multer.memoryStorage() }).single("avatar"),
   async function updateUserAvatar(req, res) {
-    const id = req.params.id;
-    await updateUserAvatarInDatabase(req.file, id);
-    res.status(204).send();
+    try {
+      const id = req.params.id;
+      await updateUserAvatarInDatabase(req.file, id);
+      res.status(204).send();
+    } catch (error) {
+      console.log(error);
+      res.status(400).send();
+    }
   }
 );
 
