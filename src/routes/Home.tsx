@@ -4,12 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Form from "../components/Form";
 import { login } from "../api/login";
 
-/**
- * @TODO
- * ALL WE HAVE TO DO NOW IS:
- * -populate the page with a {User} that has username, pass, and image
- */
-
 export default function Home() {
   const navigate = useNavigate();
 

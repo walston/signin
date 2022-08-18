@@ -104,12 +104,6 @@ router.get("/:id/avatar", async function getUserAvatar(req, res) {
     res.status(200).type("jpeg").sendFile(pathToFile);
   }
 });
-/**
- * @NOTE
- * Make sure the data is saving in DB
- * Need a router.get(:id/avatar)
- * in the get() set up a 404 that replies with the airbender
- * instead of replying with 404 we reply with 200/the last airbender */
 
 router.delete("/:id", function deleteSingleUser(req, res) {
   const id = req.params.id;
