@@ -10,6 +10,12 @@ import AvatarUploader from "../components/AvatarUploader";
 type User = { userID: number; username: string; isLoading: false };
 type UserLoading = { isLoading: true };
 
+/**
+ *
+ * @note
+ * Need to add email to the user object so we can display a dynamic user email
+ */
+
 export default function MainUser() {
   const { id } = useParams();
 
@@ -36,7 +42,7 @@ export default function MainUser() {
   return (
     <div className="MainUser">
       <AvatarUploader id={id}></AvatarUploader>
-      <h1 id="hello">Hello, {user.username}.</h1>
+      <h1 id="hello">Hello, {user.username}!</h1>
       <Form>
         <label>Username</label>
         <input
