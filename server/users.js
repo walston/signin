@@ -1,5 +1,5 @@
 import express from "express";
-import { createUserInDatabase, getUserFromDatabase } from "./database/index.js";
+import { validateUserInDB, getUserFromDatabase } from "./database/index.js";
 import { updateUserInDatabase } from "./database/updateUserInDatabase.js";
 import { updateUserAvatarInDatabase } from "./database/updateUserAvatarInDatabase.js";
 import { getUserAvatarInDatabase } from "./database/getUserAvatarInDatabase.js";
@@ -42,7 +42,7 @@ router.post("/", (req, res) => {
   if (!user) {
     res.status(400).send();
   } else {
-    createUserInDatabase(user.username, user.password)
+    validateUserInDB(user.username, user.password)
       .then((user) => res.send(user))
       .catch(() => res.status(400).send());
   }

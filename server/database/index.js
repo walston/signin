@@ -1,11 +1,6 @@
 import { db } from "./connection.js";
 import { createUserInDatabase } from "./createUserInDatabase.js";
 import { getUserFromDatabase } from "./getUserFromDatabase.js";
-import { validateUserFromDatabase } from "./validateUserFromDatabase.js";
+import { validateUserInDB } from "./validateUserInDB.js";
 
-export {
-  db,
-  createUserInDatabase,
-  getUserFromDatabase,
-  validateUserFromDatabase,
-};
+export { db, createUserInDatabase, getUserFromDatabase, validateUserInDB };
